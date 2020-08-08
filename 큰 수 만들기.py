@@ -5,7 +5,7 @@ def solution(number, k):
     for num in number[1:]:
         while stack and stack[-1] < num and k > 0:
             k -= 1
-            stack.pop() 
+            stack.pop()
         stack.append(num)
     if k != 0: # 뺄만큼 뺐는데도 감소시켜야하는 횟수가 남아있을경우 뒤를 자른다.
         stack = stack[:-k]
