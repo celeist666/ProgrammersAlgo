@@ -4,7 +4,7 @@ def solution(skill, skill_trees):
     answer = 0
 
     for skills in skill_trees:
-        skill_list = list(skill)
+        skill_list = list(skill) 
 
         for s in skills:
             if s in skill:
