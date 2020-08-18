@@ -1,9 +1,11 @@
-# 재귀를 이용해 각각의 자식에 numbers의 첫 요소를 target에서 빼거나 더한 값을 넣어준다.
+# 문제를 각각 2x2 정사각형 비교로 축소시켜 푼다.
+# 각 칸에 칸으로부터 왼쪽, 왼쪽위, 위 중의 최소값의 +1을 더해 전체 값의 max를 찾는다.
 
-def solution(numbers, target):
-    if not numbers and target == 0 :
-        return 1
-    elif not numbers:
-        return 0
-    else:
-        return solution(numbers[1:], target-numbers[0]) + solution(numbers[1:], target+numbers[0])
+def solution(board):
+    width = len(board[0])
+    height = len(board)
+    for x in range(1,height):
+        for y in range(1,width):
+                if board[x][y] == 1:
+                        board[x][y] = min(board[x-1][y-1], board[x-1][y], board[x][y-1]) + 1
+    return max([item for row in board for item in row])**2
