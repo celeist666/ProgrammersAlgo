@@ -1,48 +1,29 @@
+# 1~글자수//2까지의 수로 시도를 해보고 그 중 최소를 리턴한다.
+
 def solution(s):
+    length = []
+    result = ""
+
     if len(s) == 1:
         return 1
 
-    answer = ""
-    for c in range(1, len(s) // 2 + 1):
-        start = 0
-        finish = c
-
-        temp = ""
-        compString = ""
-        compWord = dict()
-
-        while 1:
-            if start > len(s) - 1:
-                break
-
-            if not len(temp):
-                temp = s[start:finish]
-                compWord[temp] = 1
+    for cut in range(1, len(s) // 2 + 1):
+        count = 1
+        tempStr = s[:cut]
+        for i in range(cut, len(s), cut):
+            if s[i:i+cut] == tempStr:
+                count += 1
             else:
-                if temp == s[start:finish]:
-                    compWord[temp] = compWord[temp] + 1
-                else:
-                    compCount = compWord[temp]
-                    if compCount > 1:
-                        compString += str(compWord[temp])
-                    compString += temp
+                if count == 1:
+                    count = ""
+                result += str(count) + tempStr
+                tempStr = s[i:i+cut]
+                count = 1
 
-                    compWord = dict()
-                    temp = s[start:finish]
-                    compWord[temp] = 1
+        if count == 1:
+            count = ""
+        result += str(count) + tempStr
+        length.append(len(result))
+        result = ""
 
-            start += c
-            finish += c
-
-        compCount = compWord[temp]
-        if compCount > 1:
-            compString += str(compWord[temp])
-        compString += temp
-
-        if not len(answer):
-            answer = compString
-        else:
-            if len(answer) > len(compString):
-                answer = compString
-
-    return len(answer)
+    return min(length)
