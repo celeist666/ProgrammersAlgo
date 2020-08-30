@@ -1,4 +1,7 @@
-# 정렬과 역정렬한 A,B를 곱해서 리턴한다.
+# 앞에서 구한 값을 계속 사용해서 중복 계산을 피한다.
 
-def getMinSum(A,B):
-    return sum(a*b for a, b in zip(sorted(A), sorted(B, reverse = True)))
+def solution(num):
+    a,b = 0,1
+    for i in range(num):
+        a,b = b,a+b
+    return a
